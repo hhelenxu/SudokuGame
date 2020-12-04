@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Square } from './Square';
-import { generatePuzzle, getGrid } from './Sudoku';
+import { generatePuzzle, getGrid } from './Sudoku.js';
 
 var numBlank;
 
@@ -16,7 +16,7 @@ export class Grid extends Component {
                 numBlank = Math.floor(Math.random()*10+35);
                 break;
             case 'hard':
-                numBlank = Math.floor(Math.random()*10+55);
+                numBlank = Math.floor(Math.random()*10+50);
                 break;
         }
         generatePuzzle(numBlank);

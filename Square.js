@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Box } from './Box';
-const GRIDSIZE = 9;
-const SUBGRIDSIZE = 3;
-
 
 //need props gridRow and gridCol corresponding to byGrid array indices for each Box
 export class Square extends Component {

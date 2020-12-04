@@ -3,10 +3,9 @@ import { StyleSheet, Text, TouchableHighlight } from 'react-native';
 import { update, getSelectedNumber } from './Sudoku';
 
 export class Box extends Component {
-    state = { 
-        //value : 1
-        value : this.props.val===NaN ? "" : this.props.val, 
-        editable: this.props.val===NaN ? true : false,
+    state = {
+        value : this.props.val===0 ? "" : this.props.val, 
+        editable: this.props.val===0 ? true : false,
     };
     onPress = () => {
         if (this.editable) {

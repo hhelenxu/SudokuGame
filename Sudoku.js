@@ -2,13 +2,13 @@
 // more efficient way of randomly generating boards
 const GRIDSIZE = 9;
 const SUBGRIDSIZE = 3;
-var nums = [1,2,3,4,5,6,7,8,9];
 var board, answer, byGrid, numBlank, numLeft;
 var numSelected;
 
 //generate valid Sudoku board
-export const generatePuzzle = (numMissing) => {
-    numLeft = numBlank = numMissing;
+export function generatePuzzle(numMissing) {
+    numBlank = numMissing;
+    numLeft = numBlank;
     board = [0,0,0,0,0,0,0,0,0];  // might be unnecessary
     answer = [];
     byGrid = [[],[],[],[],[],[],[],[],[]];
@@ -20,8 +20,8 @@ export const generatePuzzle = (numMissing) => {
     fillDiagonals();
     fillRemaining(0,SUBGRIDSIZE);
 
-    convertToGrid(answer);
-    //assignMissingValues();
+    assignMissingValues();
+    convertToGrid(board);
 }
 
 function fillDiagonals() {
@@ -120,17 +120,30 @@ function convertToGrid(array) {
 }
 
 //get function for numbers by Grid
-export const getGrid = (gridNum) => {
+export function getGrid(gridNum) {
     return byGrid[gridNum];
 }
 
 //choose spots to be filled in by user
 function assignMissingValues() {
-    
+    for (var i=0;i<GRIDSIZE;i++)
+        board[i] = [...answer[i]];
+
+    for (var i=0;i<numBlank;i++) {
+        var blank = Math.floor(Math.random()*81);
+        var row = Math.floor(blank/GRIDSIZE);
+        var col = blank % GRIDSIZE;
+        while (board[row][col] === 0) {
+            blank = Math.floor(Math.random()*81);
+            row = Math.floor(blank/GRIDSIZE);
+            col = blank % GRIDSIZE;
+        }
+        board[row][col] = 0;
+    }
 }
 
 //each time user inputs number
-export const update = (row, col) => {
+export function update(row, col) {
     numLeft--;
 
     //update value in board
@@ -146,10 +159,10 @@ function finished() {
 }
 
 //if new value selected
-export const changeSelected = (num) => {
+export function changeSelected(num) {
     numSelected = num;
 }
 
-export const getSelectedNumber = () => {
+export function getSelectedNumber() {
     return numSelected;
 }

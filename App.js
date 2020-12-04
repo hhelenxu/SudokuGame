@@ -166,7 +166,7 @@ const HelpScreen = ({ navigation }) => {
 const GameScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Grid level='level'/>
+      <Grid level={level}/>
       
       <View style={{marginTop: 25, flexDirection: 'row'}}>
         <FillNums num='1'/>
