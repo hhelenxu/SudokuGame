@@ -18,6 +18,7 @@ export const generatePuzzle = (numMissing) => {
     }
 
     fillDiagonals();
+    fillRemaining(0,SUBGRIDSIZE);
 
     convertToGrid(answer);
     //assignMissingValues();
@@ -38,9 +39,77 @@ function fillDiagonals() {
     }
 }
 
+function fillRemaining(row, col) {
+    //board is completely filled
+    if (row>=GRIDSIZE && col>=GRIDSIZE)
+        return true;
+
+    //if at end of row, move to next one
+    if (col>=GRIDSIZE && row<GRIDSIZE-1) {
+        row++;
+        col=0;
+    }
+
+    if (row<SUBGRIDSIZE) {
+        if (col<SUBGRIDSIZE)
+            col=SUBGRIDSIZE;
+    }
+    else if (row<GRIDSIZE-SUBGRIDSIZE) {
+        if (col==Math.floor(row/SUBGRIDSIZE)*SUBGRIDSIZE)
+            col+=SUBGRIDSIZE;
+    }
+    else {
+        if (col==GRIDSIZE-SUBGRIDSIZE) {
+            row++;
+            col = 0;
+            if (row>=GRIDSIZE)
+                return true;
+        }
+    }
+
+    // recursively fill in missing values
+    for (var i=1;i<=GRIDSIZE;i++) {
+        if (isSafe(row, col, i)) {
+            answer[row][col] = i;
+            if (fillRemaining(row, col+1))
+                return true;
+            
+            answer[row][col] = 0;
+        }
+        
+    }
+    return false;
+}
+
+function isSafe(row, col, num) {
+    var inRow = true;
+    var inCol = true;
+    var inGrid = true;
+
+    //check in row and column
+    for (var i=0;i<GRIDSIZE && (inRow||inCol);i++) {
+        if (answer[row][i]===num)
+            inRow = false;
+        if (answer[i][col]===num)
+            inCol = false;
+    }
+
+    //check in grid
+    var rowStart = row-row%SUBGRIDSIZE;
+    var colStart = col-col%SUBGRIDSIZE;
+    for (var i=0;i<SUBGRIDSIZE && inGrid;i++) {
+        for (var j=0;j<SUBGRIDSIZE && inGrid;j++) {
+            if (answer[rowStart+i][colStart+j]===num)
+                inGrid = false;
+        }
+    }
+
+    return inRow && inCol && inGrid;
+}
+
 //organizes values in arrays of 3 by 3 squares
 function convertToGrid(array) {
-    //byGrid = answer;
+    // byGrid = answer;
     for (var i=0;i<GRIDSIZE;i++) {
         for (var j=0;j<GRIDSIZE;j++) {
             var row = i < 3 ? 0 : (i < 6 ? 1 : 2);
