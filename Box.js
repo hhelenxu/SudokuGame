@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableHighlight } from 'react-native';
 import { update, getSelectedNumber } from './Sudoku';
 
