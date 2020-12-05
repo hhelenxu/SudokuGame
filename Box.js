@@ -1,29 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { StyleSheet, Text, TouchableHighlight } from 'react-native';
 import { update, getSelectedNumber } from './Sudoku';
 
-export class Box extends Component {
-    state = {
-        value : this.props.val===0 ? "" : this.props.val, 
-        editable: this.props.val===0 ? true : false,
-    };
-    onPress = () => {
-        if (this.editable) {
-            update(this.props.gridRow,this.props.gridCol);
-            this.setState({
-                value : getSelectedNumber()
-            });
-        }
-    };
-    render() {
-        return (
-            <TouchableHighlight onPress={this.onPress} style={styles.Box}>
-                <Text style={styles.sudokuText}>
-                    {this.state.value}
-                </Text>
-            </TouchableHighlight>
-        )
-    }
+export const Box = (props) => {
+    const [value, setValue] = useState(props.val);
+
+    return (
+        <TouchableHighlight onPress={() => {
+            if (!value) {
+                update(props.gridRow,props.gridCol);
+                setValue(getSelectedNumber());
+            }
+        }} style={styles.Box}>
+            <Text style={styles.sudokuText}>
+                {value ? value : ""}
+            </Text>
+        </TouchableHighlight>
+    )
 }
 
 const styles = StyleSheet.create({
