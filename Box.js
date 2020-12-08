@@ -4,15 +4,19 @@ import { update, getSelectedNumber } from './Sudoku';
 
 export const Box = (props) => {
     const [value, setValue] = useState(props.val);
+    const [editable, setEditable] = useState(() => {
+        const initial = props.val ? false : true;
+        return initial;
+    });
 
     return (
         <TouchableHighlight onPress={() => {
-            if (!value) {
+            if (editable) {
                 update(props.gridRow,props.gridCol);
                 setValue(getSelectedNumber());
             }
-        }} style={styles.Box}>
-            <Text style={styles.sudokuText}>
+        }} style={[styles.Box, editable ? styles.editable : styles.uneditable]}>
+            <Text style={[styles.sudokuText, editable ? styles.editableText : styles.uneditableText]}>
                 {value ? value : ""}
             </Text>
         </TouchableHighlight>
@@ -21,24 +25,26 @@ export const Box = (props) => {
 
 const styles = StyleSheet.create({
     Box: {
-        backgroundColor: '#007AFF',
         borderColor: 'black',
         borderWidth: 1,
         width: 40,
         height: 50,
         justifyContent: 'center'
     },
-    UnfilledBox: {
-        backgroundColor: '#87c0ff',
-        borderColor: 'black',
-        borderWidth: 1,
-        width: 40,
-        height: 50,
-        justifyContent: 'center'
+    editable: {
+        backgroundColor: '#87c0ff'
+    },
+    uneditable: {
+        backgroundColor: '#007AFF'
     },
     sudokuText: {
         fontSize: 35,
-        color: 'black',
         textAlign: 'center'
+    },
+    editableText: {
+        color: '#ad2218'
+    },
+    uneditableText: {
+        color: 'black'
     }
 })

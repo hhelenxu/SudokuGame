@@ -11,7 +11,7 @@ import { StyleSheet, Text, View, ImageBackground, Platform } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Constants } from 'expo';
+import { Constants } from 'expo-constants';
 import { Grid } from './Grid.js';
 import { FillNums } from './FillNums.js'
 
