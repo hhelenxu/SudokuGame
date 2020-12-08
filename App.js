@@ -34,7 +34,8 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight,
+    //marginTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight,
+    marginTop: 0,
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',

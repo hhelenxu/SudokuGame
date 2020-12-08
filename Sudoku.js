@@ -1,8 +1,9 @@
 // improvement- check if valid answer (backtracking) if doesn't match answer key
 // more efficient way of randomly generating boards
+import React from "react";
 const GRIDSIZE = 9;
 const SUBGRIDSIZE = 3;
-var board, answer, byGrid, numBlank, numLeft;
+var board, answer, byGrid, answerGrid, numBlank, numLeft;
 var numSelected;
 
 //generate valid Sudoku board
@@ -12,16 +13,16 @@ export function generatePuzzle(numMissing) {
     board = [0,0,0,0,0,0,0,0,0];  // might be unnecessary
     answer = [];
     byGrid = [[],[],[],[],[],[],[],[],[]];
-
+    answerGrid = [[],[],[],[],[],[],[],[],[]];
     for (var i=0;i<GRIDSIZE;i++) {
         answer.push([0,0,0,0,0,0,0,0,0]);
     }
 
     fillDiagonals();
     fillRemaining(0,SUBGRIDSIZE);
-
+    convertToGrid(answer, answerGrid);
     assignMissingValues();
-    convertToGrid(board);
+    convertToGrid(board, byGrid);
 }
 
 function fillDiagonals() {
@@ -108,13 +109,13 @@ function isSafe(row, col, num) {
 }
 
 //organizes values in arrays of 3 by 3 squares
-function convertToGrid(array) {
+function convertToGrid(src, dest) {
     // byGrid = answer;
     for (var i=0;i<GRIDSIZE;i++) {
         for (var j=0;j<GRIDSIZE;j++) {
             var row = i < 3 ? 0 : (i < 6 ? 1 : 2);
             var col = j < 3 ? 0 : (j < 6 ? 1 : 2);
-            byGrid[row*SUBGRIDSIZE+col].push(array[i][j]);
+            dest[row*SUBGRIDSIZE+col].push(src[i][j]);
         }
     }
 }
@@ -139,6 +140,12 @@ function assignMissingValues() {
             col = blank % GRIDSIZE;
         }
         board[row][col] = 0;
+        // while (byGrid[row][col] === 0) {
+        //     blank = Math.floor(Math.random()*81);
+        //     row = Math.floor(blank/GRIDSIZE);
+        //     col = blank % GRIDSIZE;
+        // }
+        // byGrid[row][col] = 0;
     }
 }
 
@@ -154,8 +161,26 @@ export function update(row, col) {
 
 //checks if the game is over
 function finished() {
-    //check if answers are valid then use Modal for popup
-    
+    //check if answers are correct
+    var isCorrect = true;
+    for (var i=0;i<GRIDSIZE && correct;i++) {
+        for (var j=0;j<GRIDSIZE && correct;j++) {
+            if (byGrid[i][j] !== answerGrid[i][j])
+                isCorrect = false;
+        }
+    }
+
+    //calls appropriate function
+    isCorrect ? correct() : incorrect();
+}
+
+function incorrect() {
+    <EndScreen finished={false}/>;
+}
+
+//create navigation back to welcome page
+function correct() {
+    <EndScreen finished={true}/>;
 }
 
 //if new value selected

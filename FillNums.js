@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
         paddingBottom: 3,
         paddingRight: 10,
         paddingLeft: 10,
-        //backgroundColor: selected ? 'grey' : 'white',
         borderRadius: 5,
         borderWidth: 1,
         borderColor: 'black'
