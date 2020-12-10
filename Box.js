@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableHighlight, Alert, Modal, View} from 'react-native';
-import { update, getSelectedNumber, finished } from './Sudoku';
+import { update, getSelectedNumber, finished, correct } from './Sudoku';
 
 export const Box = (props) => {
     const [value, setValue] = useState(props.val);
@@ -14,7 +14,7 @@ export const Box = (props) => {
         <View>
             <TouchableHighlight onPress={() => {
                 if (editable) {
-                    update(props.gridRow,props.gridCol)
+                    value ? update(props.gridRow,props.gridCol,0) : update(props.gridRow,props.gridCol,1);
                     setValue(getSelectedNumber());
                     if (finished())
                         setModalVisible(true);
@@ -35,7 +35,7 @@ export const Box = (props) => {
                 }}>
                     <View style={styles.modalView}>
                         {/* change depending on prop */}
-                        <Text style={styles.modalText}>Congrats!</Text>
+                        <Text style={styles.modalText}>Congrats!{'\n'}You correctly completed this Sudoku puzzle!</Text>
                         <TouchableHighlight
                             style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
                             onPress={() => {

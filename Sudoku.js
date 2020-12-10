@@ -149,8 +149,8 @@ function assignMissingValues() {
 }
 
 //each time user inputs number
-export function update(row, col) {
-    numLeft--;
+export function update(row, col, completed) {
+    numLeft-=completed;
 
     //update value in board
     byGrid[row][col] = numSelected;
@@ -158,7 +158,6 @@ export function update(row, col) {
 
 //checks if all boxes are filled
 export function finished() {
-    //if (numLeft===0 && correct())
     if (numLeft===0)
         return true;
     return false;
