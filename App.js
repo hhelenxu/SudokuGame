@@ -7,13 +7,14 @@
 
 import 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet, Text, View, ImageBackground, Platform } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Constants } from 'expo-constants';
 import { Grid } from './Grid.js';
-import { FillNums } from './FillNums.js'
+import { FillNums } from './FillNums.js';
+import { EndScreen } from './EndScreen.js';
 
 const Stack = createStackNavigator();
 const image = { uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/1200px-Sudoku-by-L2G-20050714.svg.png"}

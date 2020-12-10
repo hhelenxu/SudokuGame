@@ -1,6 +1,5 @@
 // improvement- check if valid answer (backtracking) if doesn't match answer key
 // more efficient way of randomly generating boards
-import React from "react";
 const GRIDSIZE = 9;
 const SUBGRIDSIZE = 3;
 var board, answer, byGrid, answerGrid, numBlank, numLeft;
@@ -155,32 +154,27 @@ export function update(row, col) {
 
     //update value in board
     byGrid[row][col] = numSelected;
-    if (numLeft===0)
-        finished();
 }
 
-//checks if the game is over
-function finished() {
-    //check if answers are correct
+//checks if all boxes are filled
+export function finished() {
+    //if (numLeft===0 && correct())
+    if (numLeft===0)
+        return true;
+    return false;
+}
+
+//check if answers are correct
+export function correct() {
     var isCorrect = true;
-    for (var i=0;i<GRIDSIZE && correct;i++) {
-        for (var j=0;j<GRIDSIZE && correct;j++) {
+    for (var i=0;i<GRIDSIZE && isCorrect;i++) {
+        for (var j=0;j<GRIDSIZE && isCorrect;j++) {
             if (byGrid[i][j] !== answerGrid[i][j])
                 isCorrect = false;
         }
     }
 
-    //calls appropriate function
-    isCorrect ? correct() : incorrect();
-}
-
-function incorrect() {
-    <EndScreen finished={false}/>;
-}
-
-//create navigation back to welcome page
-function correct() {
-    <EndScreen finished={true}/>;
+    return isCorrect;
 }
 
 //if new value selected

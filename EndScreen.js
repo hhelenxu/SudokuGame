@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, TouchableHighlight, View } from "react-native";
 
 export const EndScreen = (props) => {
-    const [modalVisible, setModalVisible] = useState(true);
+    const [modalVisible, setModalVisible] = useState(false);
     return (
         <View style={styles.centeredView}>
             <Modal
@@ -15,7 +15,7 @@ export const EndScreen = (props) => {
                 <View style={styles.modalView}>
                     {/* change depending on prop */}
                     <Text style={styles.modalText}>Congrats!</Text>
-                    <TouchableHighlight 
+                    <TouchableHighlight
                         style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
                         onPress={() => {
                             setModalVisible(!modalVisible);
@@ -24,7 +24,7 @@ export const EndScreen = (props) => {
                         <Text style={styles.textStyle}>Close</Text>
                     </TouchableHighlight>
                 </View>
-            </Modal>
+            </Modal> 
 
             {/* <TouchableHighlight
                 style={styles.openButton}
