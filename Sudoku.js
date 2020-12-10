@@ -2,7 +2,7 @@
 // more efficient way of randomly generating boards
 const GRIDSIZE = 9;
 const SUBGRIDSIZE = 3;
-var board, answer, byGrid, answerGrid, numBlank, numLeft;
+var board, answer, byGrid, numBlank, numLeft;
 var numSelected;
 
 //generate valid Sudoku board
@@ -12,14 +12,12 @@ export function generatePuzzle(numMissing) {
     board = [0,0,0,0,0,0,0,0,0];  // might be unnecessary
     answer = [];
     byGrid = [[],[],[],[],[],[],[],[],[]];
-    answerGrid = [[],[],[],[],[],[],[],[],[]];
     for (var i=0;i<GRIDSIZE;i++) {
         answer.push([0,0,0,0,0,0,0,0,0]);
     }
 
     fillDiagonals();
     fillRemaining(0,SUBGRIDSIZE);
-    convertToGrid(answer, answerGrid);
     assignMissingValues();
     convertToGrid(board, byGrid);
 }
@@ -158,22 +156,13 @@ export function update(row, col, completed) {
 
 //checks if all boxes are filled
 export function finished() {
-    if (numLeft===0)
-        return true;
-    return false;
+    return numLeft===0;
 }
 
 //check if answers are correct
 export function correct() {
-    var isCorrect = true;
-    for (var i=0;i<GRIDSIZE && isCorrect;i++) {
-        for (var j=0;j<GRIDSIZE && isCorrect;j++) {
-            if (byGrid[i][j] !== answerGrid[i][j])
-                isCorrect = false;
-        }
-    }
-
-    return isCorrect;
+    //fix to check if solution is valid
+    return true;
 }
 
 //if new value selected
@@ -183,4 +172,8 @@ export function changeSelected(num) {
 
 export function getSelectedNumber() {
     return numSelected;
+}
+
+export function getAnswer(i) {
+    return answerGrid[i];
 }

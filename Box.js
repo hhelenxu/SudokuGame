@@ -9,6 +9,7 @@ export const Box = (props) => {
         return initial;
     });
     const [modalVisible, setModalVisible] = useState(false);
+    const [isCorrect, setCorrect] = useState(false);
 
     return (
         <View>
@@ -16,8 +17,10 @@ export const Box = (props) => {
                 if (editable) {
                     value ? update(props.gridRow,props.gridCol,0) : update(props.gridRow,props.gridCol,1);
                     setValue(getSelectedNumber());
-                    if (finished())
+                    if (finished()) {
+                        setCorrect(correct());
                         setModalVisible(true);
+                    }
                 }
             }} style={[styles.Box, editable ? styles.editable : styles.uneditable]}>
                 <Text style={[styles.sudokuText, editable ? styles.editableText : styles.uneditableText]}>
@@ -34,8 +37,9 @@ export const Box = (props) => {
                     Alert.alert("Modal has been closed."); 
                 }}>
                     <View style={styles.modalView}>
-                        {/* change depending on prop */}
-                        <Text style={styles.modalText}>Congrats!{'\n'}You correctly completed this Sudoku puzzle!</Text>
+                        <Text style={styles.modalText}>
+                            {isCorrect ? "Congrats!!!\nYou correctly completed this Sudoku puzzle!" : "Incorrect :(\nTry again!"}
+                        </Text>
                         <TouchableHighlight
                             style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
                             onPress={() => {
