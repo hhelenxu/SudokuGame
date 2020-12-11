@@ -160,6 +160,7 @@ export function correct() {
     for (var i=0;i<GRIDSIZE;i++) {
         for (var j=0;j<GRIDSIZE;j++) 
             if (byGrid[i][j]!=answerGrid[i][j])
+                //return [i,j];
                 return false;
     }
     return true;

@@ -5,12 +5,11 @@
 //need props gridRow and gridCol corresponding to byGrid array indices for each Box
 //need to add prop to Square for square number ^
 
-import 'react-native-gesture-handler';
+//import 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Constants } from 'expo-constants';
 import { Grid } from './Grid.js';
 import { FillNums } from './FillNums.js';
@@ -22,7 +21,7 @@ var level;
 const App = () => {
   return (
     <NavigationContainer style={styles.container}>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Welcome">
         <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ title:"Welcome" }} />
         <Stack.Screen name="Help" component={HelpScreen} options={{ title:"Instructions" }} />
         <Stack.Screen name="Sudoku" component={GameScreen} />
@@ -31,81 +30,6 @@ const App = () => {
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    //marginTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight,
-    marginTop: 0,
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center', 
-  },
-  titleText: {
-    fontSize: 60,
-    fontWeight: "bold",
-    // fontFamily: (name of font),
-    color: "white",
-    backgroundColor: '#007AFF',
-    textAlign: "center",
-    marginTop: 0,
-    marginHorizontal: 15
-  },
-  subtitleText: {
-    fontSize: 35,
-    color: '#007AFF',
-    backgroundColor: 'white',
-    textAlign: 'center',
-    marginTop: 50,
-    marginBottom: 25,
-    marginHorizontal: 15
-  },
-  bodyText: {
-    fontSize: 25,
-    color: 'black',
-    marginTop: 25,
-    marginHorizontal: 15,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    textAlign: 'center'
-  },
-  image: {
-    flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    backgroundColor: 'transparent'
-  },
-  levelButton: {
-    marginRight: 100,
-    marginLeft: 100,
-    marginTop: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: 'black'
-  },
-  buttonText: {
-    fontSize: 25,
-    color: '#007AFF',
-    textAlign: 'center'
-  },
-  userText: {
-    fontSize: 35,
-    color: '#007AFF',
-    textAlign: 'center'
-  },
-  Numbers: {
-    borderWidth: 3,
-    borderColor: 'black',
-    justifyContent: 'center',
-    width: 50,
-    height:50,
-    marginTop: 10
-  }
-});
 
 const WelcomeScreen = ({ navigation }) => {
   return ( 
@@ -185,5 +109,80 @@ const GameScreen = ({ navigation }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    //marginTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight,
+    marginTop: 0,
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center', 
+  },
+  titleText: {
+    fontSize: 60,
+    fontWeight: "bold",
+    // fontFamily: (name of font),
+    color: "white",
+    backgroundColor: '#007AFF',
+    textAlign: "center",
+    marginTop: 0,
+    marginHorizontal: 15
+  },
+  subtitleText: {
+    fontSize: 35,
+    color: '#007AFF',
+    backgroundColor: 'white',
+    textAlign: 'center',
+    marginTop: 50,
+    marginBottom: 25,
+    marginHorizontal: 15
+  },
+  bodyText: {
+    fontSize: 25,
+    color: 'black',
+    marginTop: 25,
+    marginHorizontal: 15,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    textAlign: 'center'
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    backgroundColor: 'transparent'
+  },
+  levelButton: {
+    marginRight: 100,
+    marginLeft: 100,
+    marginTop: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'black'
+  },
+  buttonText: {
+    fontSize: 25,
+    color: '#007AFF',
+    textAlign: 'center'
+  },
+  userText: {
+    fontSize: 35,
+    color: '#007AFF',
+    textAlign: 'center'
+  },
+  Numbers: {
+    borderWidth: 3,
+    borderColor: 'black',
+    justifyContent: 'center',
+    width: 50,
+    height:50,
+    marginTop: 10
+  }
+});
 
 export default App;
