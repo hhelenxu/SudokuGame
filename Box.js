@@ -17,7 +17,10 @@ export const Box = (props) => {
                 if (editable) {
                     value ? update(props.gridRow,props.gridCol,0) : update(props.gridRow,props.gridCol,1);
                     setValue(getSelectedNumber());
+                    // setCorrect(correct());
+                    //     setModalVisible(true);
                     if (finished()) {
+                        //setValue(correct());
                         setCorrect(correct());
                         setModalVisible(true);
                     }
