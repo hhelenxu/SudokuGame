@@ -17,10 +17,7 @@ export const Box = (props) => {
                 if (editable) {
                     value ? update(props.gridRow,props.gridCol,0) : update(props.gridRow,props.gridCol,1);
                     setValue(getSelectedNumber());
-                    // setCorrect(correct());
-                    //     setModalVisible(true);
                     if (finished()) {
-                        //setValue(correct());
                         setCorrect(correct());
                         setModalVisible(true);
                     }
@@ -41,7 +38,10 @@ export const Box = (props) => {
                 }}>
                     <View style={styles.modalView}>
                         <Text style={styles.modalText}>
-                            {isCorrect ? "Congrats!!!\nYou correctly completed this Sudoku puzzle!" : "Incorrect :(\nTry again!"}
+                            {isCorrect ? "Congrats!!!" : "Incorrect :("}
+                        </Text>
+                        <Text style={styles.smallModalText}>
+                            {isCorrect ? "You correctly completed this Sudoku puzzle!" : "Try again!"}
                         </Text>
                         <TouchableHighlight
                             style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
@@ -86,7 +86,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        margin: 20,
+        marginLeft: '15%',
+        marginRight: '15%',
+        marginTop: '80%',
+        marginBottom: '80%',
         backgroundColor: "white",
         borderRadius: 20,
         padding: 35,
@@ -101,7 +104,7 @@ const styles = StyleSheet.create({
         elevation: 5
     },
     openButton: {
-        backgroundColor: "#F194FF",
+        backgroundColor: "#007AFF",
         borderRadius: 20,
         padding: 10,
         elevation: 2
@@ -112,7 +115,13 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     modalText: {
+        fontSize: 30,
         marginBottom: 15,
+        textAlign: "center"
+    },
+    smallModalText: {
+        fontSize: 20,
+        marginBottom: 25,
         textAlign: "center"
     }
 })

@@ -139,12 +139,6 @@ function assignMissingValues() {
             col = blank % GRIDSIZE;
         }
         board[row][col] = 0;
-        // while (byGrid[row][col] === 0) {
-        //     blank = Math.floor(Math.random()*81);
-        //     row = Math.floor(blank/GRIDSIZE);
-        //     col = blank % GRIDSIZE;
-        // }
-        // byGrid[row][col] = 0;
     }
 }
 
@@ -166,11 +160,9 @@ export function correct() {
     for (var i=0;i<GRIDSIZE;i++) {
         for (var j=0;j<GRIDSIZE;j++) 
             if (byGrid[i][j]!=answerGrid[i][j])
-                //return [i,j];
                 return false;
     }
     return true;
-    //return [0];
 }
 
 //if new value selected
@@ -178,6 +170,7 @@ export function changeSelected(num) {
     numSelected = num;
 }
 
+//return selected number
 export function getSelectedNumber() {
     return numSelected;
 }
