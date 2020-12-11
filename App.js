@@ -14,7 +14,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Constants } from 'expo-constants';
 import { Grid } from './Grid.js';
 import { FillNums } from './FillNums.js';
-import { EndScreen } from './EndScreen.js';
 
 const Stack = createStackNavigator();
 const image = { uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/1200px-Sudoku-by-L2G-20050714.svg.png"}
@@ -155,8 +154,8 @@ const HelpScreen = ({ navigation }) => {
       <Text style={styles.bodyText}>
         Each row, column, and (3 by 3) square needs to be filled with the numbers
         1-9 without repeats. To play, choose a number at the bottom and then tap
-        an empty square to fill it with that number. When you are done, click the 
-        "I'm done!" button and the computer will check if you did it right.
+        an empty square to fill it with that number. When you are done, the computer will
+        automatically check if you did it right and give you feedback!
       </Text>
       <Text style={styles.subtitleText}>
         Happy playing!
