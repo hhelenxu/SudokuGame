@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableHighlight, Alert, Modal, View } from 'react-native';
-import { update, getSelectedNumber, finished, correct } from './Sudoku';
+import React, { useState, useRef } from 'react';
+import { Animated, StyleSheet, Text, TouchableHighlight, Alert, Modal, View, ImageBackground } from 'react-native';
+import { update, getSelectedNumber, finished, correct, boxCorrect } from './Sudoku';
+import { Checkmark } from './Checkmark.js';
 
 var startTime = 0, endTime = 0;
+var images = [require("./x.png"),require("./check.png")];
 function stopTime() {
     var d = new Date();
     endTime = d.getTime();
@@ -30,9 +32,25 @@ export const Box = (props) => {
     const [isCorrect, setCorrect] = useState(false);
     startTime = props.start;
 
+    const fadeAnim = useRef(new Animated.Value(0)).current;
+    const fadeIn = () => {
+        Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 1000
+        }).start();
+    };
+    const fadeOut = () => {
+        Animated.timing(fadeAnim, {
+            toValue: 0,
+            duration: 3000
+        }).start();
+    };
+
     return (
         <View>
             <TouchableHighlight onPress={() => {
+                fadeIn();
+                setTimeout(() => { fadeOut(); }, 3000);
                 if (editable) {
                     value ? update(props.gridRow,props.gridCol,0) : update(props.gridRow,props.gridCol,1);
                     setValue(getSelectedNumber());
@@ -40,11 +58,25 @@ export const Box = (props) => {
                         setCorrect(correct());
                         setModalVisible(true);
                     }
+                    //image = boxCorrect(props.gridRow, props.gridCol) ? './check.png'  : './x.png';
+                    fadeIn();
+                    setTimeout(() => {  fadeOut(); }, 2000);
+                    
                 }
             }} style={[styles.Box, editable ? styles.editable : styles.uneditable]}>
-                <Text style={[styles.sudokuText, editable ? styles.editableText : styles.uneditableText]}>
-                    {value ? value : ""}
-                </Text>
+                <View>
+                <Animated.Image
+                    style={[
+                    styles.fadingContainer, {
+                        opacity: fadeAnim // Bind opacity to animated value
+                    }]}
+                    source={images[boxCorrect(props.gridRow, props.gridCol)]}
+                    />
+                    <Text style={[styles.sudokuText, editable ? styles.editableText : styles.uneditableText]}>
+                        {value ? value : ""}
+                    </Text>
+                    
+                </View>
             </TouchableHighlight>
 
             <View style={styles.centeredView}>
@@ -142,5 +174,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginBottom: 25,
         textAlign: "center"
-    }
+    },
+    fadingContainer: {
+        // paddingVertical: 8,
+        // paddingHorizontal: 16,
+        //backgroundColor: "powderblue",
+        height: 50,
+        width: 40,
+        justifyContent: 'center'
+    },
 })

@@ -156,11 +156,27 @@ export function finished() {
 
 //check if answers are correct
 export function correct() {
+    //check for duplicates in each grid
     for (var i=0;i<GRIDSIZE;i++) {
-        for (var j=0;j<GRIDSIZE;j++) 
-            if (byGrid[i][j]!=answerGrid[i][j])
+        freq = [0,0,0,0,0,0,0,0,0];
+        for (var j=0;j<GRIDSIZE;j++) {
+            var num = byGrid[i][j]-1;
+            if (freq[num]>0)
                 return false;
+            freq[num]++;
+        }
     }
+
+    //check for duplicates in each row
+
+    //check for duplicates in each column
+
+    //less desirable way to check if correct
+    // for (var i=0;i<GRIDSIZE;i++) {
+    //     for (var j=0;j<GRIDSIZE;j++) 
+    //         if (byGrid[i][j]!=answerGrid[i][j])
+    //             return false;
+    // }
     return true;
 }
 
@@ -176,4 +192,9 @@ export function getSelectedNumber() {
 
 export function getAnswer(i) {
     return answerGrid[i];
+}
+
+export function boxCorrect(row, col) {
+    return byGrid[row][col] === answerGrid[row][col] ? 1 : 0;
+    //return 1;
 }
