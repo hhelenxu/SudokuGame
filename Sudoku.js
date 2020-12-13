@@ -109,7 +109,6 @@ function isSafe(row, col, num) {
 
 //organizes values in arrays of 3 by 3 squares
 function convertToGrid(src, dest) {
-    // byGrid = answer;
     for (var i=0;i<GRIDSIZE;i++) {
         for (var j=0;j<GRIDSIZE;j++) {
             var row = i < 3 ? 0 : (i < 6 ? 1 : 2);
@@ -160,7 +159,6 @@ export function correct() {
     for (var i=0;i<GRIDSIZE;i++) {
         for (var j=0;j<GRIDSIZE;j++) 
             if (byGrid[i][j]!=answerGrid[i][j])
-                //return [i,j];
                 return false;
     }
     return true;

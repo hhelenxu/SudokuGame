@@ -1,6 +1,24 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableHighlight, Alert, Modal, View} from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, Alert, Modal, View } from 'react-native';
 import { update, getSelectedNumber, finished, correct } from './Sudoku';
+
+var startTime = 0, endTime = 0;
+function stopTime() {
+    var d = new Date();
+    endTime = d.getTime();
+    var timeInMS = endTime-startTime;
+    var formattedTime = "";
+    if (timeInMS>3600000) {
+        formattedTime += Math.trunc(timeInMS/3600000)+" h, ";
+        timeInMS %= 3600000;
+    }
+    if (timeInMS>60000) {
+        formattedTime += Math.trunc(timeInMS/60000)+" min, ";
+        timeInMS %= 60000;
+    }
+    formattedTime += Math.trunc(timeInMS/1000)+" s";
+    return formattedTime;
+}
 
 export const Box = (props) => {
     const [value, setValue] = useState(props.val);
@@ -10,6 +28,7 @@ export const Box = (props) => {
     });
     const [modalVisible, setModalVisible] = useState(false);
     const [isCorrect, setCorrect] = useState(false);
+    startTime = props.start;
 
     return (
         <View>
@@ -41,7 +60,7 @@ export const Box = (props) => {
                             {isCorrect ? "Congrats!!!" : "Incorrect :("}
                         </Text>
                         <Text style={styles.smallModalText}>
-                            {isCorrect ? "You correctly completed this Sudoku puzzle!" : "Try again!"}
+                            {isCorrect ? "You correctly completed this Sudoku puzzle in "+stopTime()+"!" : "Try again!"}
                         </Text>
                         <TouchableHighlight
                             style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
