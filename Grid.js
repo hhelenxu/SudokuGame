@@ -5,7 +5,7 @@ import { generatePuzzle, getGrid } from './Sudoku.js';
 
 export const Grid = (props) => {
     var numBlank;
-    var feedback;
+    const [feedback, setFeedback] = useState(true);
     const [modalVisible, setModalVisible] = useState(true);
     switch(props.level) {
         case 'easy': 
@@ -36,7 +36,7 @@ export const Grid = (props) => {
                         <TouchableHighlight
                             style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
                             onPress={() => {
-                                feedback = true;
+                                setFeedback(true);
                                 setModalVisible(!modalVisible);
                             }}
                         >
@@ -45,7 +45,7 @@ export const Grid = (props) => {
                         <TouchableHighlight
                             style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
                             onPress={() => {
-                                feedback = false;
+                                setFeedback(false);
                                 setModalVisible(!modalVisible);
                             }}
                         >

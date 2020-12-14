@@ -1,8 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Animated, StyleSheet, Text, TouchableHighlight, Alert, Modal, View } from 'react-native';
-import { update, getSelectedNumber, finished, correct, boxCorrect } from './Sudoku';
-//import { Checkmark } from './Checkmark.js';
-//import * as Animatable from 'react-native-animatable';
+import { update, getSelectedNumber, finished, correct, isBoxCorrect, getAnswer, getGrid } from './Sudoku';
 
 var images = [require("./x.png"),require("./check.png")];
 var startTime = 0, endTime = 0;
@@ -24,15 +22,16 @@ function stopTime() {
 }
 
 export const Box = (props) => {
-    const [value, setValue] = useState(props.val);
+    //const [value, setValue] = useState(props.val);
+    const [value, setValue] = useState(props.val+" "+getAnswer(props.gridRow)[props.gridCol]);
     const [editable, setEditable] = useState(() => {
         const initial = props.val ? false : true;
         return initial;
     });
     const [modalVisible, setModalVisible] = useState(false);
     const [isCorrect, setCorrect] = useState(false);
+    const [boxCorrect, setBoxCorrect] = useState(false);
     startTime = props.start;
-    var instantFeedback = props.feedback;
 
     const fadeAnim = useRef(new Animated.Value(0)).current;
     const fadeIn = () => {
@@ -44,23 +43,24 @@ export const Box = (props) => {
     const fadeOut = () => {
         Animated.timing(fadeAnim, {
             toValue: 0,
-            duration: 3000
+            duration: 2000
         }).start();
     };
 
     return (
         <View>
             <TouchableHighlight onPress={() => {
-                fadeIn();
-                setTimeout(() => { fadeOut(); }, 3000);
+                
                 if (editable) {
                     value ? update(props.gridRow,props.gridCol,0) : update(props.gridRow,props.gridCol,1);
-                    setValue(getSelectedNumber());
+                    //setValue(getSelectedNumber());
+                    setValue(getGrid(props.gridRow)[props.gridCol]+" "+getAnswer(props.gridRow)[props.gridCol]);
+                    setBoxCorrect(isBoxCorrect(props.gridRow, props.gridCol));
                     if (finished()) {
                         setCorrect(correct());
                         setModalVisible(true);
                     }
-                    if (instantFeedback) {
+                    if (props.feedback) {
                         fadeIn();
                         setTimeout(() => {  fadeOut(); }, 2000);
                     }
@@ -71,12 +71,12 @@ export const Box = (props) => {
                             {value ? value : ""}
                         </Text>
                         <Animated.Image
-                    style={[
-                    styles.fadingContainer, {
-                        opacity: fadeAnim // Bind opacity to animated value
-                    }]}
-                    source={images[boxCorrect(props.gridRow, props.gridCol)]}
-                    />                    
+                            style={[
+                            styles.fadingContainer, {
+                                opacity: fadeAnim // Bind opacity to animated value
+                            }]}
+                            source={images[boxCorrect]}
+                        />                    
                 </View>
             </TouchableHighlight>
 
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#007AFF'
     },
     sudokuText: {
-        fontSize: 35,
+        fontSize: 15,
         textAlign: 'center',
     },
     editableText: {
@@ -177,9 +177,6 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     fadingContainer: {
-        // paddingVertical: 8,
-        // paddingHorizontal: 16,
-        //backgroundColor: "powderblue",
         height: 50,
         width: 40,
         justifyContent: 'center',
