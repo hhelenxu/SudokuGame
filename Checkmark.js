@@ -1,17 +1,19 @@
 import React, { useRef } from "react";
 import { Animated, Text, View, Image, StyleSheet, Button } from "react-native";
 
+var images = [require("./x.png"),require("./check.png")];
+
 export const Checkmark = (props) => {
     // fadeAnim will be used as the value for opacity. Initial Value: 0
     const fadeAnim = useRef(new Animated.Value(0)).current;
 
-    //const fadeIn = () => {
+    const fadeIn = () => {
         // Will change fadeAnim value to 1 in 5 seconds
         Animated.timing(fadeAnim, {
             toValue: 1,
             duration: 5000
         }).start();
-    //};
+    };
 
     const fadeOut = () => {
         // Will change fadeAnim value to 0 in 5 seconds
@@ -22,7 +24,13 @@ export const Checkmark = (props) => {
     };
 
     return (
-        <Image source={require('./check.png')}/>
+        <Animated.Image
+            style={[
+            styles.fadingContainer, {
+                opacity: fadeAnim // Bind opacity to animated value
+            }]}
+            source={images[boxCorrect(props.gridRow, props.gridCol)]}
+        />
         // <View style={styles.container}>
         //     <Animated.Image
         //         style={[
