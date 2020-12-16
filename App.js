@@ -13,7 +13,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Constants } from 'expo-constants';
 import { Grid } from './Grid.js';
 import { NumChoices } from './NumChoices.js';
-import { generatePuzzle } from './Sudoku.js';
+import { generatePuzzle, changeSelected } from './Sudoku.js';
 
 const Stack = createStackNavigator();
 const image = { uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/1200px-Sudoku-by-L2G-20050714.svg.png"}
@@ -101,7 +101,8 @@ function numBlank() {
 }
 
 const GameScreen = ({ navigation }) => {
-  generatePuzzle(numBlank())
+  generatePuzzle(numBlank());
+  changeSelected(0);
   return (
     <View style={styles.container}>
       <Grid level={level} start={new Date().getTime()}/>
