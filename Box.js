@@ -37,13 +37,15 @@ export const Box = (props) => {
     const fadeIn = () => {
         Animated.timing(fadeAnim, {
             toValue: 1,
-            duration: 1000
+            duration: 1000,
+            useNativeDriver: true,
         }).start();
     };
     const fadeOut = () => {
         Animated.timing(fadeAnim, {
             toValue: 0,
-            duration: 2000
+            duration: 2000,
+            useNativeDriver: true,
         }).start();
     };
 

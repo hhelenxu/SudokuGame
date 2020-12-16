@@ -12,7 +12,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Constants } from 'expo-constants';
 import { Grid } from './Grid.js';
-import { FillNums } from './FillNums.js';
+import { NumChoices } from './NumChoices.js';
 
 const Stack = createStackNavigator();
 const image = { uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/1200px-Sudoku-by-L2G-20050714.svg.png"}
@@ -93,19 +93,7 @@ const GameScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Grid level={level} start={new Date().getTime()}/>
       
-      <View style={{marginTop: 25, flexDirection: 'row'}}>
-        <FillNums num='1'/>
-        <FillNums num='2'/>
-        <FillNums num='3'/>
-        <FillNums num='4'/>
-        <FillNums num='5'/>
-      </View>
-      <View style={{marginTop: 15, flexDirection: 'row'}}>
-        <FillNums num='6'/>
-        <FillNums num='7'/>
-        <FillNums num='8'/>
-        <FillNums num='9'/>
-      </View>
+      <NumChoices/>
     </View>
   );
 };
