@@ -188,8 +188,8 @@ export function getSelectedNumber() {
     return numSelected;
 }
 
-export function getAnswer(i) {
-    return answerGrid[i];
+export function getAnswer(r, c) {
+    return answerGrid[r][c];
 }
 
 export function isBoxCorrect(row, col) {

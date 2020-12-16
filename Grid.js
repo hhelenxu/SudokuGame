@@ -1,24 +1,13 @@
 import React, {useState} from 'react';
 import { View, Modal, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import { Square } from './Square';
-import { generatePuzzle, getGrid } from './Sudoku.js';
+import { getGrid } from './Sudoku.js';
 
 export const Grid = (props) => {
-    var numBlank;
     const [feedback, setFeedback] = useState(true);
     const [modalVisible, setModalVisible] = useState(true);
-    switch(props.level) {
-        case 'easy': 
-            numBlank = Math.floor(Math.random()*10+15);
-            break;
-        case 'medium':
-            numBlank = Math.floor(Math.random()*10+35);
-            break;
-        case 'hard':
-            numBlank = Math.floor(Math.random()*10+50);
-            break;
-    }
-    generatePuzzle(numBlank);
+    
+    //generatePuzzle(numBlank);
 
     return (
         <View>

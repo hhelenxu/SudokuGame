@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Animated, StyleSheet, Text, TouchableHighlight, Alert, Modal, View } from 'react-native';
-import { update, getSelectedNumber, finished, correct, isBoxCorrect, getAnswer, getGrid } from './Sudoku';
+import { update, getSelectedNumber, finished, correct, getAnswer } from './Sudoku';
 
 var images = [require("./x.png"),require("./check.png")];
 var startTime = 0, endTime = 0;
@@ -22,16 +22,16 @@ function stopTime() {
 }
 
 export const Box = (props) => {
-    //const [value, setValue] = useState(props.val);
-    const [value, setValue] = useState(props.val+" "+getAnswer(props.gridRow)[props.gridCol]);
+    var correctNum = getAnswer(props.gridRow, props.gridCol);
+    const [value, setValue] = useState(props.val);
     const [editable, setEditable] = useState(() => {
         const initial = props.val ? false : true;
         return initial;
     });
     const [modalVisible, setModalVisible] = useState(false);
     const [isCorrect, setCorrect] = useState(false);
-    const [boxCorrect, setBoxCorrect] = useState(false);
     startTime = props.start;
+    
 
     const fadeAnim = useRef(new Animated.Value(0)).current;
     const fadeIn = () => {
@@ -52,12 +52,9 @@ export const Box = (props) => {
     return (
         <View>
             <TouchableHighlight onPress={() => {
-                
                 if (editable) {
                     value ? update(props.gridRow,props.gridCol,0) : update(props.gridRow,props.gridCol,1);
-                    //setValue(getSelectedNumber());
-                    setValue(getGrid(props.gridRow)[props.gridCol]+" "+getAnswer(props.gridRow)[props.gridCol]);
-                    setBoxCorrect(isBoxCorrect(props.gridRow, props.gridCol));
+                    setValue(getSelectedNumber());
                     if (finished()) {
                         setCorrect(correct());
                         setModalVisible(true);
@@ -77,7 +74,7 @@ export const Box = (props) => {
                             styles.fadingContainer, {
                                 opacity: fadeAnim // Bind opacity to animated value
                             }]}
-                            source={images[boxCorrect]}
+                            source={images[value==correctNum ? 1:0]}
                         />                    
                 </View>
             </TouchableHighlight>
@@ -127,7 +124,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#007AFF'
     },
     sudokuText: {
-        fontSize: 15,
+        fontSize: 35,
         textAlign: 'center',
     },
     editableText: {

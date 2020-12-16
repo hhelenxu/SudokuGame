@@ -1,4 +1,3 @@
-//figure out how to unhighlight when next one pressed
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableHighlight } from 'react-native';
 import { changeSelected } from './Sudoku';
