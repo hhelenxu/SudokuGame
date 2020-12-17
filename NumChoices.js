@@ -21,6 +21,7 @@ export const NumChoices = () => {
                 <FillNums num='7' selected={selected==7 ? true:false} onChange={handleChange}/>
                 <FillNums num='8' selected={selected==8 ? true:false} onChange={handleChange}/>
                 <FillNums num='9' selected={selected==9 ? true:false} onChange={handleChange}/>
+                <FillNums num='-1' selected={selected==-1 ? true:false} onChange={handleChange}/>
             </View>
         </View>
     )
@@ -35,5 +36,5 @@ const styles = StyleSheet.create({
     row: {
         marginTop: 15, 
         flexDirection: 'row'
-    }
+    },
 })

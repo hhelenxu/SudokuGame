@@ -146,7 +146,7 @@ export function update(row, col, completed) {
     numLeft-=completed;
 
     //update value in board
-    byGrid[row][col] = numSelected;
+    byGrid[row][col] = numSelected == -1 ? 0 : numSelected;
 }
 
 //checks if all boxes are filled

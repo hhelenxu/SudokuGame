@@ -30,6 +30,7 @@ export const Box = (props) => {
     });
     const [modalVisible, setModalVisible] = useState(false);
     const [isCorrect, setCorrect] = useState(false);
+    const [boxCorrect, setBoxCorrect] = useState(0);  //0 for incorrect, 1 for correct
     startTime = props.start;
     
 
@@ -53,15 +54,25 @@ export const Box = (props) => {
         <View>
             <TouchableHighlight onPress={() => {
                 if (editable) {
-                    value ? update(props.gridRow,props.gridCol,0) : update(props.gridRow,props.gridCol,1);
-                    setValue(getSelectedNumber());
+                    if (getSelectedNumber()==-1) {
+                        if (value!=0) {
+                            update(props.gridRow,props.gridCol,-1);
+                            setValue(0);
+                        }
+                        setBoxCorrect(0);
+                    }
+                    else {
+                        value ? update(props.gridRow,props.gridCol,0) : update(props.gridRow,props.gridCol,1);
+                        setValue(getSelectedNumber());
+                        setBoxCorrect(value == correctNum ? 1 : 0);
+                        if (props.feedback) {
+                            setTimeout(() => { fadeIn(); }, 500);
+                            setTimeout(() => {  fadeOut(); }, 2000);
+                        }
+                    }
                     if (finished()) {
                         setCorrect(correct());
                         setModalVisible(true);
-                    }
-                    if (props.feedback) {
-                        fadeIn();
-                        setTimeout(() => {  fadeOut(); }, 2000);
                     }
                 }
             }} style={[styles.Box, editable ? styles.editable : styles.uneditable]}>
@@ -89,7 +100,7 @@ export const Box = (props) => {
                 }}>
                     <View style={styles.modalView}>
                         <Text style={styles.modalText}>
-                            {isCorrect ? "Congrats!!!" : "Incorrect :("}
+                            {isCorrect ? "You did it!!!" : "Incorrect :("}
                         </Text>
                         <Text style={styles.smallModalText}>
                             {isCorrect ? "You correctly completed this Sudoku puzzle in "+stopTime()+"!" : "Try again!"}

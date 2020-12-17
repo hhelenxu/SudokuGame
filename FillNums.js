@@ -11,8 +11,8 @@ export const FillNums = (props) => {
             setSelected(!selected);
             props.onChange(props.num);
         }} style={[styles.Box, props.selected ? styles.selected : styles.unselected]}>
-            <Text style={styles.text}>
-                {props.num}
+            <Text style={props.num=='-1' ? styles.small : styles.text}>
+                {props.num==-1 ? 'erase' : props.num}
             </Text>
         </TouchableHighlight>
     )
@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         borderColor: 'black',
-        width: 50
+        width: 50,
+        justifyContent: 'center'
     },
     selected: {
         backgroundColor: 'grey',
@@ -42,5 +43,11 @@ const styles = StyleSheet.create({
         fontSize: 40,
         color: '#007AFF',
         textAlign: 'center'
+    },
+    small: {
+        fontSize: 20,
+        color: '#007AFF',
+        textAlign: 'center',
+        
     }
 })
