@@ -58,10 +58,7 @@ const WelcomeScreen = ({ navigation }) => {
           onPress={() => navigation.navigate('Help')}>
           <Text style={styles.buttonText}>?</Text>
       </TouchableOpacity>
-      {/* <Button title="Easy" color="black"  onPress={() => navigation.navigate('Sudoku')} /> */}
-      {/* <Button title="Medium" color="black" onPress={() => navigation.navigate('Sudoku')} /> */}
-      {/* <Button title="Hard" color="black" onPress={() => navigation.navigate('Sudoku')} /> */}
-      {/* <Button title="?" onPress={() => navigation.navigate('Help')} /> */}
+
       <Text style={styles.author}> Made by Helen Xu. </Text>
       <TouchableOpacity style={styles.link}
           onPress={() => Linking.openURL('https://github.com/hhelenxu/SudokuGame')}>

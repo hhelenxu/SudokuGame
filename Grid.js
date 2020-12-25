@@ -68,12 +68,17 @@ export const Grid = (props) => {
 }
 
 const styles = StyleSheet.create({
+    centeredView: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     modalView: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginLeft: '15%',
-        marginRight: '15%',
+        //marginLeft: '15%',
+        //marginRight: '15%',
+
         marginTop: '80%',
         marginBottom: '80%',
         backgroundColor: "white",

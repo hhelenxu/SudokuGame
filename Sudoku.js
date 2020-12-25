@@ -2,8 +2,7 @@
 // more efficient way of randomly generating boards
 const GRIDSIZE = 9;
 const SUBGRIDSIZE = 3;
-var board, answer, byGrid, answerGrid, numBlank, numLeft;
-var numSelected;
+var board, answer, byGrid, answerGrid, numBlank, numLeft, numSelected, missed;
 
 //generate valid Sudoku board
 export function generatePuzzle(numMissing) {
@@ -13,6 +12,7 @@ export function generatePuzzle(numMissing) {
     answer = [];
     byGrid = [[],[],[],[],[],[],[],[],[]];
     answerGrid = [[],[],[],[],[],[],[],[],[]];
+    missed = 0;
     for (var i=0;i<GRIDSIZE;i++) {
         answer.push([0,0,0,0,0,0,0,0,0]);
     }
@@ -195,4 +195,12 @@ export function getAnswer(r, c) {
 export function isBoxCorrect(row, col) {
     return byGrid[row][col] == answerGrid[row][col] ? 1 : 0;
     //return 1;
+}
+
+export function addMissed() {
+    missed++;
+}
+
+export function getMissed() {
+    return missed;
 }
