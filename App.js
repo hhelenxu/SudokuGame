@@ -1,11 +1,3 @@
-//To do:
-// fix spacing at top: https://stackoverflow.com/questions/45170712/margin-top-for-header-bar-in-react-native-navigation
-// modal for finish
-// size margins/buttons based on percentage/screen space
-//need props gridRow and gridCol corresponding to byGrid array indices for each Box
-//need to add prop to Square for square number ^
-
-//import 'react-native-gesture-handler';
 import React from 'react';
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, Linking, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -16,7 +8,7 @@ import { NumChoices } from './NumChoices.js';
 import { generatePuzzle, changeSelected } from './Sudoku.js';
 
 const Stack = createStackNavigator();
-const image = { uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/1200px-Sudoku-by-L2G-20050714.svg.png"}
+const image = require("./background.png");
 var level;
 
 const App = () => {
@@ -26,7 +18,6 @@ const App = () => {
         <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ title:"Home Screen" }} />
         <Stack.Screen name="Help" component={HelpScreen} options={{ title:"Instructions" }} />
         <Stack.Screen name="Sudoku" component={GameScreen} />
-        {/* <Stack.Screen name="Final" component={EndScreen} options={{ title: 'Congrats' }} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -38,7 +29,6 @@ const WelcomeScreen = ({ navigation }) => {
       <Text style={styles.titleText}> Welcome to Sudoku! </Text>
       <Text style={styles.subtitleText}> Choose a level to begin: </Text>
       
-      {/* buttons */}
       <TouchableOpacity style={styles.levelButton}
           onPress={() => {navigation.navigate('Sudoku'), level='easy'}}>
           <Text style={styles.buttonText}>Easy</Text>

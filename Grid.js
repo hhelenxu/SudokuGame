@@ -6,22 +6,21 @@ import { getGrid } from './Sudoku.js';
 export const Grid = (props) => {
     const [feedback, setFeedback] = useState(true);
     const [modalVisible, setModalVisible] = useState(true);
-    
-    //generatePuzzle(numBlank);
 
     return (
-        <View>
         <View style={styles.centeredView}>
-                <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                    Alert.alert("Modal has been closed."); 
-                }}>
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Would you like to receive immediate feedback on your answers?</Text>
-                        <View style={styles.row}>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                Alert.alert("Modal has been closed."); 
+            }}>
+                <View style={styles.modalView}>
+                    <Text style={styles.modalText}>
+                        Would you like to receive immediate feedback on your answers?
+                    </Text>
+                    <View style={styles.row}>
                         <TouchableHighlight
                             style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
                             onPress={() => {
@@ -40,29 +39,28 @@ export const Grid = (props) => {
                         >
                             <Text style={styles.textStyle}>No</Text>
                         </TouchableHighlight>
-                        </View>
                     </View>
-                </Modal> 
-            </View>
-        <View>
-            <View style={{ borderLeftWidth:5, borderRightWidth:5, borderTopWidth:5, flexDirection: 'row' }}>
-                <Square num={0} values={getGrid(0)} start={props.start} feedback={feedback}/>
-                <Square num={1} values={getGrid(1)} start={props.start} feedback={feedback}/>
-                <Square num={2} values={getGrid(2)} start={props.start} feedback={feedback}/>       
-            </View>
+                </View>
+            </Modal> 
+            <View>
+                <View style={{ borderLeftWidth:5, borderRightWidth:5, borderTopWidth:5, flexDirection: 'row' }}>
+                    <Square num={0} values={getGrid(0)} start={props.start} feedback={feedback}/>
+                    <Square num={1} values={getGrid(1)} start={props.start} feedback={feedback}/>
+                    <Square num={2} values={getGrid(2)} start={props.start} feedback={feedback}/>       
+                </View>
 
-            <View style={{ borderLeftWidth:5, borderRightWidth:5, flexDirection: 'row' }}>
-                <Square num={3} values={getGrid(3)} start={props.start} feedback={feedback}/>
-                <Square num={4} values={getGrid(4)} start={props.start} feedback={feedback}/>
-                <Square num={5} values={getGrid(5)} start={props.start} feedback={feedback}/>
-            </View>
+                <View style={{ borderLeftWidth:5, borderRightWidth:5, flexDirection: 'row' }}>
+                    <Square num={3} values={getGrid(3)} start={props.start} feedback={feedback}/>
+                    <Square num={4} values={getGrid(4)} start={props.start} feedback={feedback}/>
+                    <Square num={5} values={getGrid(5)} start={props.start} feedback={feedback}/>
+                </View>
 
-            <View style={{ borderLeftWidth:5, borderRightWidth:5, borderBottomWidth:5, flexDirection: 'row' }}>
-                <Square num={6} values={getGrid(6)} start={props.start} feedback={feedback}/>
-                <Square num={7} values={getGrid(7)} start={props.start} feedback={feedback}/>
-                <Square num={8} values={getGrid(8)} start={props.start} feedback={feedback}/>
+                <View style={{ borderLeftWidth:5, borderRightWidth:5, borderBottomWidth:5, flexDirection: 'row' }}>
+                    <Square num={6} values={getGrid(6)} start={props.start} feedback={feedback}/>
+                    <Square num={7} values={getGrid(7)} start={props.start} feedback={feedback}/>
+                    <Square num={8} values={getGrid(8)} start={props.start} feedback={feedback}/>
+                </View>
             </View>
-        </View>
         </View>
     );
 }
@@ -76,14 +74,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        //marginLeft: '15%',
-        //marginRight: '15%',
-
+        marginLeft: '15%',
+        marginRight: '15%',
+        //marginHorizontal: '10%',
         marginTop: '80%',
         marginBottom: '80%',
         backgroundColor: "white",
         borderRadius: 20,
-        padding: 35,
+        padding: 30,
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {

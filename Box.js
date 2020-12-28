@@ -4,6 +4,7 @@ import { update, getSelectedNumber, finished, correct, getAnswer, addMissed, get
 
 var images = [require("./x.png"),require("./check.png")];
 var startTime = 0, endTime = 0;
+
 function stopTime() {
     var d = new Date();
     endTime = d.getTime();
@@ -79,16 +80,16 @@ export const Box = (props) => {
                 }
             }} style={[styles.Box, editable ? styles.editable : styles.uneditable]}>
                 <View>
-                        <Text style={[styles.sudokuText, editable ? styles.editableText : styles.uneditableText]}>
-                            {value ? value : ""}
-                        </Text>
-                        <Animated.Image
-                            style={[
-                            styles.fadingContainer, {
-                                opacity: fadeAnim // Bind opacity to animated value
-                            }]}
-                            source={images[value==correctNum ? 1:0]}
-                        />                    
+                    <Text style={[styles.sudokuText, editable ? styles.editableText : styles.uneditableText]}>
+                        {value ? value : ""}
+                    </Text>
+                    <Animated.Image
+                        style={[
+                        styles.fadingContainer, {
+                            opacity: fadeAnim // Bind opacity to animated value
+                        }]}
+                        source={images[value==correctNum ? 1:0]}
+                    />                    
                 </View>
             </TouchableHighlight>
 
@@ -193,5 +194,5 @@ const styles = StyleSheet.create({
         width: 40,
         justifyContent: 'center',
         marginTop: -40
-    },
+    }
 })

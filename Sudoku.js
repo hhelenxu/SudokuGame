@@ -1,5 +1,3 @@
-// improvement- check if valid answer (backtracking) if doesn't match answer key
-// more efficient way of randomly generating boards
 const GRIDSIZE = 9;
 const SUBGRIDSIZE = 3;
 var board, answer, byGrid, answerGrid, numBlank, numLeft, numSelected, missed;
@@ -8,7 +6,7 @@ var board, answer, byGrid, answerGrid, numBlank, numLeft, numSelected, missed;
 export function generatePuzzle(numMissing) {
     numBlank = numMissing;
     numLeft = numBlank;
-    board = [0,0,0,0,0,0,0,0,0];  // might be unnecessary
+    board = [0,0,0,0,0,0,0,0,0];
     answer = [];
     byGrid = [[],[],[],[],[],[],[],[],[]];
     answerGrid = [[],[],[],[],[],[],[],[],[]];
@@ -156,20 +154,6 @@ export function finished() {
 
 //check if answers are correct
 export function correct() {
-    //check for duplicates in each grid
-    // for (var i=0;i<GRIDSIZE;i++) {
-    //     freq = [0,0,0,0,0,0,0,0,0];
-    //     for (var j=0;j<GRIDSIZE;j++) {
-    //         var num = byGrid[i][j]-1;
-    //         if (freq[num]>0)
-    //             return false;
-    //         freq[num]++;
-    //     }
-    // }
-    //check for duplicates in each row
-    //check for duplicates in each column
-
-    //less desirable way to check if correct
     for (var i=0;i<GRIDSIZE;i++) {
         for (var j=0;j<GRIDSIZE;j++) 
             if (byGrid[i][j]!=answerGrid[i][j])
@@ -194,7 +178,6 @@ export function getAnswer(r, c) {
 
 export function isBoxCorrect(row, col) {
     return byGrid[row][col] == answerGrid[row][col] ? 1 : 0;
-    //return 1;
 }
 
 export function addMissed() {
