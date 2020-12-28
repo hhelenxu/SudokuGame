@@ -36,5 +36,5 @@ const styles = StyleSheet.create({
     row: {
         marginTop: 15, 
         flexDirection: 'row'
-    },
+    }
 })
